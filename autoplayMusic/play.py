@@ -1,6 +1,6 @@
 # -*- coding:utf8 -*-
 
-import os , random
+import os , random, subprocess
 
 
 music_list = os.path.join(os.path.abspath(os.path.curdir), 'music_list.lst')
@@ -16,3 +16,7 @@ random.shuffle(all_music)
 content = '\n'.join(all_music)
 
 open(music_list, 'w').write(content)
+
+cmd = 'mplayer -playlist %s' % (music_list,)
+a = subprocess.Popen(cmd, shell=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+a.wait()
